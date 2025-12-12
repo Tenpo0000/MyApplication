@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 
 import androidx.activity.EdgeToEdge;
@@ -24,16 +27,63 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Activity_Home extends AppCompatActivity {
-
     RecyclerView recyclerDestaque;
     RecyclerView recyclerSecoes;
     LinearLayout layoutIndicadores;
-
     PagerSnapHelper snapHelper = new PagerSnapHelper();
-
     private Handler sliderHandler = new Handler(Looper.getMainLooper());
     private Runnable sliderRunnable;
     private int velocidadeScroll = 4000;
+
+    private static final long TEMPO_LIMITE = 60 * 1000;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        verificarSeAindaEstaLogado();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        salvarHoraDeSaida();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sliderHandler.removeCallbacks(sliderRunnable);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sliderHandler.postDelayed(sliderRunnable, velocidadeScroll);
+    }
+    private void salvarHoraDeSaida() {
+        SharedPreferences prefs = getSharedPreferences("users", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong("ultimo_acesso", System.currentTimeMillis());
+        editor.apply();
+    }
+
+    private void verificarSeAindaEstaLogado() {
+        SharedPreferences prefs = getSharedPreferences("users", MODE_PRIVATE);
+        boolean estaLogado = prefs.getBoolean("estaLogado", false);
+        long ultimoAcesso = prefs.getLong("ultimo_acesso", 0);
+        long agora = System.currentTimeMillis();
+
+        if (estaLogado) {
+            if ((agora - ultimoAcesso) > TEMPO_LIMITE) {
+                prefs.edit().putBoolean("estaLogado", false).apply();
+                Toast.makeText(this, "Tempo expirado! Faça login novamente.", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(this, Activity_Login.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +100,8 @@ public class Activity_Home extends AppCompatActivity {
         recyclerDestaque = findViewById(R.id.recyclerDestaque);
         layoutIndicadores = findViewById(R.id.ll_indicadores);
         recyclerSecoes = findViewById(R.id.recyclerSecoes);
-
         List<Integer> imagensDestaque = Arrays.asList(
+                R.drawable.bob_esponja_filme,
                 R.drawable.bob_esponja_filme,
                 R.drawable.bob_esponja_filme,
                 R.drawable.bob_esponja_filme,
@@ -60,7 +110,6 @@ public class Activity_Home extends AppCompatActivity {
         );
 
         recyclerDestaque.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
         snapHelper.attachToRecyclerView(recyclerDestaque);
 
         Adapter_FilmesDestaque adapterDestaque = new Adapter_FilmesDestaque(imagensDestaque);
@@ -78,47 +127,21 @@ public class Activity_Home extends AppCompatActivity {
         });
 
         List<Adapter_Secao> listaDeSecoes = Arrays.asList(
-                new Adapter_Secao("Filmes Novos", Arrays.asList(
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme)),
-
-                new Adapter_Secao("Recomendados", Arrays.asList(
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme)),
-
-                new Adapter_Secao("Mais Vistos", Arrays.asList(
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme,
-                        R.drawable.bob_esponja_filme))
+                new Adapter_Secao("Filmes Novos", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
+                new Adapter_Secao("Recomendados", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
+                new Adapter_Secao("Mais Vistos", Arrays.asList(R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme))
         );
 
         recyclerSecoes.setLayoutManager(new LinearLayoutManager(this));
         recyclerSecoes.setNestedScrollingEnabled(false);
-
         Adapter_Main adapterMain = new Adapter_Main(this, listaDeSecoes);
         recyclerSecoes.setAdapter(adapterMain);
         iniciarAutoScroll();
     }
-
     private void atualizarIndicador() {
         LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerDestaque.getLayoutManager();
         if (layoutManager != null) {
             View viewCentralizada = snapHelper.findSnapView(layoutManager);
-
             if (viewCentralizada != null) {
                 int posicao = layoutManager.getPosition(viewCentralizada);
                 marcarIndicadorAtual(posicao);
@@ -152,42 +175,36 @@ public class Activity_Home extends AppCompatActivity {
             }
         }
     }
+
     private void iniciarAutoScroll() {
         sliderRunnable = new Runnable() {
             @Override
             public void run() {
                 if (recyclerDestaque == null || recyclerDestaque.getLayoutManager() == null) return;
+
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerDestaque.getLayoutManager();
                 int posAtual = layoutManager.findFirstVisibleItemPosition();
                 int posProxima = posAtual + 1;
+
                 if (recyclerDestaque.getAdapter() != null) {
                     if (posProxima >= recyclerDestaque.getAdapter().getItemCount()) {
                         posProxima = 0;
                     }
+
                     LinearSmoothScroller smoothScroller = new LinearSmoothScroller(Activity_Home.this) {
                         @Override
                         protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
                             return 100f / displayMetrics.densityDpi;
                         }
                     };
+
                     smoothScroller.setTargetPosition(posProxima);
                     layoutManager.startSmoothScroll(smoothScroller);
                 }
+
                 sliderHandler.postDelayed(this, velocidadeScroll);
             }
         };
-        sliderHandler.postDelayed(sliderRunnable, velocidadeScroll);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        sliderHandler.removeCallbacks(sliderRunnable);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         sliderHandler.postDelayed(sliderRunnable, velocidadeScroll);
     }
 }
