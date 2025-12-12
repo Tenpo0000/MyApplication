@@ -1,145 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Azul"
-    tools:context=".HomeActivity">
+    tools:context=".Activity_Home">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerPrincipal"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerDestaque"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerFilmes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/ll_rodape"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerDestaque" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:id="@+id/ll_barraDePesquisa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_icones">
-
-        <TextView
-            android:id="@+id/edtBarraPesquisa"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_edtbordado"
-            android:drawableLeft="@drawable/icone_lupa"
-            android:drawablePadding="10dp"
-            android:hint="Bob esponja..."
-            android:padding="10dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/icone_categorias"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="end"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/shape_edtbordado" />
-    </LinearLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerDestaque"
+                    android:layout_width="match_parent"
+                    android:layout_height="600dp"
+                    android:nestedScrollingEnabled="false" />
+                
+                <LinearLayout
+                    android:id="@+id/ll_indicadores"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/ll_categorias"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_barraDePesquisa">
+                    <LinearLayout
+                        android:id="@+id/ll_icones"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:paddingTop="30dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="10dp">
 
-        <TextView
-            android:id="@+id/txtFilmes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_edtbordado"
-            android:gravity="center"
-            android:text="Filmes"
-            android:textColor="@color/white" />
+                        <ImageView
+                            android:id="@+id/icone_notificacao"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="16dp"
+                            android:src="@drawable/icone_notificacao" />
 
-        <TextView
-            android:id="@+id/txtProgramas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_edtbordado"
-            android:gravity="center"
-            android:text="Programas de TV"
-            android:textColor="@color/white" />
+                        <ImageView
+                            android:id="@+id/icone_transmitirTela"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="16dp"
+                            android:src="@drawable/icone_transmitir_tela" />
 
-        <TextView
-            android:id="@+id/txtSeries"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_edtbordado"
-            android:gravity="center"
-            android:text="Séries"
-            android:textColor="@color/white" />
-    </LinearLayout>
+                        <ImageView
+                            android:id="@+id/icone_menu"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/icone_menu" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_barraDePesquisa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/edtBarraPesquisa"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shape_edtbordado"
+                            android:drawableLeft="@drawable/icone_lupa"
+                            android:drawablePadding="10dp"
+                            android:hint="Bob esponja..."
+                            android:padding="10dp"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/white" />
+
+                        <TextView
+                            android:id="@+id/icone_categorias"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="@drawable/shape_edtbordado" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_categorias"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/txtFilmes"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shape_edtbordado"
+                            android:gravity="center"
+                            android:padding="8dp"
+                            android:text="Filmes"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/txtProgramas"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shape_edtbordado"
+                            android:gravity="center"
+                            android:padding="8dp"
+                            android:text="TV"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/txtSeries"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shape_edtbordado"
+                            android:gravity="center"
+                            android:padding="8dp"
+                            android:text="Séries"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerSecoes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
         android:id="@+id/ll_rodape"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_weight="1"
         android:background="@drawable/shape_bordado"
+        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/btnHome"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="-10dp"
-            android:layout_marginBottom="-10dp"
             android:layout_weight="1"
             android:src="@drawable/icone_home" />
 
@@ -147,9 +187,6 @@
             android:id="@+id/btnFavoritos"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:paddingTop="1dp"
-            android:layout_margin="10dp"
             android:layout_weight="1"
             android:src="@drawable/outline_bookmark_24" />
 
@@ -157,50 +194,8 @@
             android:id="@+id/btnMaisVistos"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:src="@drawable/fogo_icone" />
-
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_icones"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/icone_notificacao"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/icone_notificacao" />
-
-        <ImageView
-            android:id="@+id/icone_transmitirTela"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/icone_transmitir_tela" />
-
-        <ImageView
-            android:id="@+id/icone_menu"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/icone_menu" />
-    </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

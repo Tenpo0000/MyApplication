@@ -15,7 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class RegistrarActivity extends AppCompatActivity {
+public class Activity_Registrar extends AppCompatActivity {
 
     Button btnEntrar;
     EditText edtConfirmarSenha;
@@ -39,7 +39,7 @@ public class RegistrarActivity extends AppCompatActivity {
 
     }
     public void login(View v){
-        Intent login = new Intent(this, LoginActivity.class);
+        Intent login = new Intent(this, Activity_Login.class);
         startActivity(login);
     }
     public void registrarUsuario(View v){
