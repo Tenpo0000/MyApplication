@@ -12,9 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-<<<<<<< Updated upstream
-            android:name=".RedefinirSenhaActivity"
-=======
             android:name=".EmAlta"
             android:exported="false" />
         <activity
@@ -28,19 +25,21 @@
             android:exported="false" />
         <activity
             android:name=".Categoria_filme"
->>>>>>> Stashed changes
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".Activity_RedefinirSenha"
             android:exported="false" />
         <activity
-            android:name=".RegistrarActivity"
+            android:name=".Activity_Home"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activity_Registrar"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity_Login"
+            android:exported="false" />
+        <activity
+            android:name=".Activity_Main"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
