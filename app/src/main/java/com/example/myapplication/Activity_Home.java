@@ -32,10 +32,15 @@ public class Activity_Home extends AppCompatActivity {
     RecyclerView recyclerSecoes;
     LinearLayout layoutIndicadores;
     TextView txtFilmes;
+    TextView txtSeries;
+    TextView txtProgramasDeTv;
+    ImageView imgfavorito;
+    ImageView imgemAlta;
+
     PagerSnapHelper snapHelper = new PagerSnapHelper();
     private Handler sliderHandler = new Handler(Looper.getMainLooper());
     private Runnable sliderRunnable;
-    private int velocidadeScroll = 4000;
+    private int velocidadeScroll = 3000;
 
     private static final long TEMPO_LIMITE = 60 * 1000;
 
@@ -103,6 +108,11 @@ public class Activity_Home extends AppCompatActivity {
         layoutIndicadores = findViewById(R.id.ll_indicadores);
         recyclerSecoes = findViewById(R.id.recyclerSecoes);
         txtFilmes = findViewById(R.id.txtFilmes);
+        txtProgramasDeTv = findViewById(R.id.txtProgramas);
+        txtSeries = findViewById(R.id.txtSeries);
+        imgfavorito = findViewById(R.id.btnFavoritos);
+        imgfavorito = findViewById(R.id.btnMaisVistos);
+
 
         List<Integer> imagensDestaque = Arrays.asList(
                 R.drawable.bob_esponja_filme,
@@ -147,6 +157,28 @@ public class Activity_Home extends AppCompatActivity {
         Intent intent = new Intent(this, Categoria_filme.class);
         startActivity(intent);
     }
+
+    public void categoria_Tv(View v) {
+        Intent intent = new Intent(this, Categoria_TV.class);
+        startActivity(intent);
+    }
+
+
+    public void categoria_Serie(View v) {
+        Intent intent = new Intent(this, Categoria_Series.class);
+        startActivity(intent);
+    }
+
+    public void favoritos (View v) {
+        Intent intent = new Intent(this, Favoritos.class);
+        startActivity(intent);
+    }
+
+    public void emAlta (View v) {
+        Intent intent = new Intent(this, EmAlta.class);
+        startActivity(intent);
+    }
+
     private void atualizarIndicador() {
         LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerDestaque.getLayoutManager();
         if (layoutManager != null) {

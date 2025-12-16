@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".EmAlta"
+            android:exported="false" />
+        <activity
+            android:name=".Favoritos"
+            android:exported="false" />
+        <activity
+            android:name=".Categoria_Series"
+            android:exported="false" />
+        <activity
+            android:name=".Categoria_TV"
+            android:exported="false" />
+        <activity
             android:name=".Categoria_filme"
             android:exported="false" />
         <activity
