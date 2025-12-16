@@ -12,7 +12,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+<<<<<<< Updated upstream
             android:name=".RedefinirSenhaActivity"
+=======
+            android:name=".EmAlta"
+            android:exported="false" />
+        <activity
+            android:name=".Favoritos"
+            android:exported="false" />
+        <activity
+            android:name=".Categoria_Series"
+            android:exported="false" />
+        <activity
+            android:name=".Categoria_TV"
+            android:exported="false" />
+        <activity
+            android:name=".Categoria_filme"
+>>>>>>> Stashed changes
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
