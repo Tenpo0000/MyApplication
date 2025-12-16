@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Bolinha branca -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#FFFFFF"/>
+            <size
+                android:width="48dp"
+                android:height="48dp"/>
+        </shape>
+    </item>
+
+    <!-- Seta MENOR -->
+    <item
+        android:drawable="@drawable/seta"
+        android:width="16dp"
+        android:height="16dp"
+        android:gravity="center"/>
+</layer-list>

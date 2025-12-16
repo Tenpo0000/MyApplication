@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -9,169 +8,152 @@
     android:background="@color/Azul"
     tools:context=".Activity_Home">
 
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
+        android:id="@+id/ll_icones"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@+id/ll_rodape"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/icone_notificacao"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/icone_notificacao" />
+
+        <ImageView
+            android:id="@+id/icone_transmitirTela"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/icone_transmitir_tela" />
+
+        <ImageView
+            android:id="@+id/icone_menu"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/icone_menu" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_barraDePesquisa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_icones">
+
+        <TextView
+            android:id="@+id/edtBarraPesquisa"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_edtbordado"
+            android:drawableLeft="@drawable/icone_lupa"
+            android:drawablePadding="10dp"
+            android:hint="Bob esponja..."
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/icone_categorias_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/shape_edtbordado" />
+    </LinearLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerDestaque"
-                    android:layout_width="match_parent"
-                    android:layout_height="600dp"
-                    android:nestedScrollingEnabled="false" />
+    <LinearLayout
+        android:id="@+id/ll_categorias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_barraDePesquisa">
 
-                <LinearLayout
-                    android:id="@+id/ll_indicadores"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal" />
+        <TextView
+            android:id="@+id/txtFilmes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_edtbordado"
+            android:gravity="center"
+            android:onClick="categoria_filme"
+            android:text="Filmes"
+            android:textColor="@color/white" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+        <TextView
+            android:id="@+id/txtProgramas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_edtbordado"
+            android:gravity="center"
+            android:onClick="categoria_Tv"
+            android:text="Programas de TV"
+            android:textColor="@color/white" />
 
-                    <LinearLayout
-                        android:id="@+id/ll_icones"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:paddingTop="30dp"
-                        android:paddingEnd="10dp"
-                        android:paddingBottom="10dp">
+        <TextView
+            android:id="@+id/txtSeries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_edtbordado"
+            android:gravity="center"
+            android:onClick="categoria_Serie"
+            android:text="Séries"
+            android:textColor="@color/white" />
+    </LinearLayout>
 
-                        <ImageView
-                            android:id="@+id/icone_notificacao"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginEnd="16dp"
-                            android:src="@drawable/icone_notificacao" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerDestaque"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:minHeight="200dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_categorias" />
 
-                        <ImageView
-                            android:id="@+id/icone_transmitirTela"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginEnd="16dp"
-                            android:src="@drawable/icone_transmitir_tela" />
-
-                        <ImageView
-                            android:id="@+id/icone_menu"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/icone_menu" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ll_barraDePesquisa"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <EditText
-                            android:id="@+id/edtBarraPesquisa"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/shape_edtbordado"
-                            android:drawableLeft="@drawable/icone_lupa"
-                            android:drawablePadding="10dp"
-                            android:hint="Bob esponja..."
-                            android:padding="10dp"
-                            android:textColor="@color/white"
-                            android:textColorHint="@color/white" />
-
-                        <TextView
-                            android:id="@+id/icone_categorias"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_marginEnd="16dp"
-                            android:background="@drawable/shape_edtbordado" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ll_categorias"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:paddingBottom="10dp">
-
-                        <TextView
-                            android:id="@+id/txtFilmes"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/shape_edtbordado"
-                            android:gravity="center"
-                            android:onClick="categoria_filme"
-                            android:padding="8dp"
-                            android:text="Filmes"
-                            android:textColor="@color/white" />
-
-                        <TextView
-                            android:id="@+id/txtProgramas"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="8dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/shape_edtbordado"
-                            android:gravity="center"
-                            android:padding="8dp"
-                            android:text="TV"
-                            android:textColor="@color/white" />
-
-                        <TextView
-                            android:id="@+id/txtSeries"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/shape_edtbordado"
-                            android:gravity="center"
-                            android:padding="8dp"
-                            android:text="Séries"
-                            android:textColor="@color/white" />
-                    </LinearLayout>
-                </LinearLayout>
-            </FrameLayout>
-
-             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerSecoes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:nestedScrollingEnabled="false" />
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerSecoes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/ll_rodape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerDestaque" />
 
     <LinearLayout
         android:id="@+id/ll_rodape"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:background="@drawable/shape_bordado"
-        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -179,24 +161,32 @@
 
         <ImageView
             android:id="@+id/btnHome"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:src="@drawable/icone_home" />
 
         <ImageView
             android:id="@+id/btnFavoritos"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:src="@drawable/outline_bookmark_24" />
+            android:onClick="favoritos"
+            android:src="@drawable/favorito_contorno" />
 
         <ImageView
             android:id="@+id/btnMaisVistos"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:src="@drawable/fogo_icone" />
+            android:onClick="emAlta"
+            android:src="@drawable/icone_fogo_contorno" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

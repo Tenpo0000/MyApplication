@@ -1,3 +1,4 @@
+
 package com.example.myapplication;
 
 import android.content.Intent;
@@ -16,26 +17,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Arrays;
 import java.util.List;
 
-public class Categoria_filme extends AppCompatActivity {
-
+public class Favoritos extends AppCompatActivity {
     RecyclerView secoes;
     ImageView home;
     ImageView emAlta;
-    ImageView favoritos;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_categoria_filme);
+        setContentView(R.layout.activity_favoritos);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
-
         });
-
         secoes = findViewById(R.id.recyclerFilmesCategoria);
         List<Adapter_Secao> listaDeSecoes = Arrays.asList(
                 new Adapter_Secao("Filmes Novos", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
@@ -53,7 +49,6 @@ public class Categoria_filme extends AppCompatActivity {
 
         home = findViewById(R.id.btnHome);
         emAlta = findViewById(R.id.btnMaisVistos);
-        favoritos = findViewById(R.id.btnFavoritos);
     }
 
     public void home(View v) {
@@ -63,11 +58,6 @@ public class Categoria_filme extends AppCompatActivity {
 
     public void emAlta(View v) {
         Intent intent = new Intent(this,EmAlta.class);
-        startActivity(intent);
-    }
-
-    public void favoritos(View v) {
-        Intent intent = new Intent(this,Favoritos.class);
         startActivity(intent);
     }
 }

@@ -12,7 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".Categoria_filme"
+            android:name=".Favoritos"
+            android:exported="false" />
+        <activity
+            android:name=".EmAlta"
+            android:exported="false" />
+        <activity
+            android:name=".Categoria_TV"
+            android:exported="false"
+            android:theme="@style/Theme.MyApplication" />
+        <activity
+            android:name=".Categoria_Series"
+            android:exported="false" />
+        <activity
+            android:name=".Categoria_Filme"
             android:exported="false" />
         <activity
             android:name=".Activity_RedefinirSenha"

@@ -16,8 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Arrays;
 import java.util.List;
 
-public class Categoria_filme extends AppCompatActivity {
-
+public class Categoria_TV extends AppCompatActivity {
     RecyclerView secoes;
     ImageView home;
     ImageView emAlta;
@@ -28,12 +27,11 @@ public class Categoria_filme extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_categoria_filme);
+        setContentView(R.layout.activity_categoria_tv);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
-
         });
 
         secoes = findViewById(R.id.recyclerFilmesCategoria);
@@ -55,7 +53,6 @@ public class Categoria_filme extends AppCompatActivity {
         emAlta = findViewById(R.id.btnMaisVistos);
         favoritos = findViewById(R.id.btnFavoritos);
     }
-
     public void home(View v) {
         Intent intent = new Intent(this,Activity_Home.class);
         startActivity(intent);
