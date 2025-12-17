@@ -1,10 +1,6 @@
 package com.example.myapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -13,61 +9,47 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Categoria_filme extends AppCompatActivity {
 
-    RecyclerView secoes;
-    ImageView home;
-    ImageView emAlta;
-    ImageView favoritos;
-
+    RecyclerView recyclerSecoes;
+    List<Adapter_Secao> listaDeSecoes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_categoria_filme);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
-
         });
 
-        secoes = findViewById(R.id.recyclerFilmesCategoria);
-        List<Adapter_Secao> listaDeSecoes = Arrays.asList(
-                new Adapter_Secao("Filmes Novos", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
-                new Adapter_Secao("Filmes Novos", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
-                new Adapter_Secao("Filmes Novos", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
-                new Adapter_Secao("Filmes Novos", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
-                new Adapter_Secao("Recomendados", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
-                new Adapter_Secao("Mais Vistos", Arrays.asList(R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme))
-        );
+        recyclerSecoes = findViewById(R.id.recyclerFilmesCategoria);
 
-        secoes.setLayoutManager(new LinearLayoutManager(this));
-        secoes.setNestedScrollingEnabled(false);
-        Adapter_Main adapterMain = new Adapter_Main(this, listaDeSecoes);
-        secoes.setAdapter(adapterMain);
-
-        home = findViewById(R.id.btnHome);
-        emAlta = findViewById(R.id.btnMaisVistos);
-        favoritos = findViewById(R.id.btnFavoritos);
+        carregarDados();
+        configurarRecycler();
     }
 
-    public void home(View v) {
-        Intent intent = new Intent(this,Activity_Home.class);
-        startActivity(intent);
+    private void carregarDados() {
+        List<Filme> listaFilmes = new ArrayList<>();
+        listaFilmes.add(new Filme("Bob Esponja", R.drawable.bob_esponja_filme));
+        listaFilmes.add(new Filme("Patrick", R.drawable.bob_esponja_filme));
+        listaFilmes.add(new Filme("Sandy", R.drawable.bob_esponja_filme));
+        listaFilmes.add(new Filme("Lula Molusco", R.drawable.bob_esponja_filme));
+        listaFilmes.add(new Filme("Seu Sirigueijo", R.drawable.bob_esponja_filme));
+
+        listaDeSecoes.add(new Adapter_Secao("Filmes Novos", listaFilmes));
+        listaDeSecoes.add(new Adapter_Secao("Ação", listaFilmes));
+        listaDeSecoes.add(new Adapter_Secao("Aventura", listaFilmes));
     }
 
-    public void emAlta(View v) {
-        Intent intent = new Intent(this,EmAlta.class);
-        startActivity(intent);
-    }
-
-    public void favoritos(View v) {
-        Intent intent = new Intent(this,Favoritos.class);
-        startActivity(intent);
+    private void configurarRecycler() {
+        recyclerSecoes.setLayoutManager(new LinearLayoutManager(this));
+        recyclerSecoes.setAdapter(new Adapter_Main(this, listaDeSecoes));
     }
 }

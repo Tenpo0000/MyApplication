@@ -3,7 +3,6 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,21 +12,20 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Categoria_TV extends AppCompatActivity {
-    RecyclerView secoes;
-    ImageView home;
-    ImageView emAlta;
-    ImageView favoritos;
 
+    RecyclerView secoes;
+    List<Adapter_Secao> listaDeSecoes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_categoria_tv);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -35,36 +33,31 @@ public class Categoria_TV extends AppCompatActivity {
         });
 
         secoes = findViewById(R.id.recyclerFilmesCategoria);
-        List<Adapter_Secao> listaDeSecoes = Arrays.asList(
-                new Adapter_Secao("Filmes Novos", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
-                new Adapter_Secao("Filmes Novos", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
-                new Adapter_Secao("Filmes Novos", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
-                new Adapter_Secao("Filmes Novos", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
-                new Adapter_Secao("Recomendados", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
-                new Adapter_Secao("Mais Vistos", Arrays.asList(R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme))
-        );
 
+        carregarDados();
+        configurarRecycler();
+    }
+
+    private void carregarDados() {
+        List<Filme> listaTV = new ArrayList<>();
+        listaTV.add(new Filme("Programa 1", R.drawable.bob_esponja_filme));
+        listaTV.add(new Filme("Programa 2", R.drawable.bob_esponja_filme));
+        listaTV.add(new Filme("Programa 3", R.drawable.bob_esponja_filme));
+        listaTV.add(new Filme("Programa 4", R.drawable.bob_esponja_filme));
+
+        listaDeSecoes.add(new Adapter_Secao("Canais ao Vivo", listaTV));
+        listaDeSecoes.add(new Adapter_Secao("Esportes", listaTV));
+        listaDeSecoes.add(new Adapter_Secao("Notícias", listaTV));
+        listaDeSecoes.add(new Adapter_Secao("Desenhos", listaTV));
+    }
+
+    private void configurarRecycler() {
         secoes.setLayoutManager(new LinearLayoutManager(this));
         secoes.setNestedScrollingEnabled(false);
-        Adapter_Main adapterMain = new Adapter_Main(this, listaDeSecoes);
-        secoes.setAdapter(adapterMain);
-
-        home = findViewById(R.id.btnHome);
-        emAlta = findViewById(R.id.btnMaisVistos);
-        favoritos = findViewById(R.id.btnFavoritos);
-    }
-    public void home(View v) {
-        Intent intent = new Intent(this,Activity_Home.class);
-        startActivity(intent);
+        secoes.setAdapter(new Adapter_Main(this, listaDeSecoes));
     }
 
-    public void emAlta(View v) {
-        Intent intent = new Intent(this,EmAlta.class);
-        startActivity(intent);
-    }
-
-    public void favoritos(View v) {
-        Intent intent = new Intent(this,Favoritos.class);
-        startActivity(intent);
-    }
+    public void home(View v) { startActivity(new Intent(this, Activity_Home.class)); }
+    public void emAlta(View v) { startActivity(new Intent(this, EmAlta.class)); }
+    public void favoritos(View v) { startActivity(new Intent(this, Favoritos.class)); }
 }

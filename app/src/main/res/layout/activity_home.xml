@@ -31,12 +31,13 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerDestaque"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="400dp"
                     android:scaleType="centerCrop" />
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="200dp" />
+                    android:layout_height="150dp"
+                    android:background="#99000000" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -58,20 +59,6 @@
                             android:layout_height="24dp"
                             android:layout_marginEnd="16dp"
                             android:src="@drawable/icone_notificacao" />
-
-                        <ImageView
-                            android:id="@+id/icone_transmitirTela"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginEnd="16dp"
-                            android:src="@drawable/icone_transmitir_tela" />
-
-                        <ImageView
-                            android:id="@+id/icone_menu"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginEnd="8dp"
-                            android:src="@drawable/icone_menu" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -90,19 +77,16 @@
                             android:layout_marginEnd="8dp"
                             android:layout_weight="1"
                             android:background="@drawable/shape_edtbordado"
-                            android:drawableStart="@drawable/icone_lupa"
-                            android:drawablePadding="10dp"
                             android:hint="Bob esponja..."
                             android:padding="10dp"
                             android:textColor="@color/white"
-                            android:textColorHint="@color/white" />
+                            android:textColorHint="#DDDDDD" />
 
                         <TextView
                             android:id="@+id/icone_categorias_btn"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_marginEnd="16dp"
-                            android:drawableBottom="@drawable/info"
                             android:background="@drawable/shape_edtbordado" />
                     </LinearLayout>
 
@@ -110,51 +94,41 @@
                         android:id="@+id/ll_categorias"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_weight="1"
+                        android:layout_marginTop="12dp"
                         android:gravity="center"
-                        android:orientation="horizontal"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ll_barraDePesquisa">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/txtFilmes"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_weight="1"
                             android:background="@drawable/shape_edtbordado"
-                            android:gravity="center"
-                            android:onClick="categoria_filme"
+                            android:padding="8dp"
+                            android:layout_marginEnd="8dp"
                             android:text="Filmes"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            android:onClick="categoria_filme"/>
 
                         <TextView
                             android:id="@+id/txtProgramas"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_weight="1"
                             android:background="@drawable/shape_edtbordado"
-                            android:gravity="center"
-                            android:onClick="categoria_Tv"
-                            android:text="Programas de TV"
-                            android:textColor="@color/white" />
+                            android:padding="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="TV"
+                            android:textColor="@color/white"
+                            android:onClick="categoria_Tv"/>
 
                         <TextView
                             android:id="@+id/txtSeries"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="16dp"
-                            android:layout_weight="1"
                             android:background="@drawable/shape_edtbordado"
-                            android:gravity="center"
-                            android:onClick="categoria_Serie"
+                            android:padding="8dp"
                             android:text="Séries"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            android:onClick="categoria_Serie"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -169,19 +143,26 @@
                 android:padding="10dp"/>
 
             <LinearLayout
-                android:id="@+id/ll_indicadores"
+                android:id="@+id/ll_conteudo_principal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:orientation="horizontal" />
+                android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerSecoes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:nestedScrollingEnabled="false" />
+                <LinearLayout
+                    android:id="@+id/ll_indicadores"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerSecoes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:nestedScrollingEnabled="false" />
+            </LinearLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
@@ -193,9 +174,7 @@
         android:background="@drawable/shape_bordado"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
             android:id="@+id/btnHome"
@@ -204,21 +183,6 @@
             android:layout_weight="1"
             android:src="@drawable/icone_home" />
 
-        <ImageView
-            android:id="@+id/btnFavoritos"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:onClick="favoritos"
-            android:src="@drawable/favorito_contorno" />
-
-        <ImageView
-            android:id="@+id/btnMaisVistos"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:onClick="emAlta"
-            android:src="@drawable/icone_fogo_contorno" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

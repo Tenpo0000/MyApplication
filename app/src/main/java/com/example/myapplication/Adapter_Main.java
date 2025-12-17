@@ -25,7 +25,7 @@ public class Adapter_Main extends RecyclerView.Adapter<Adapter_Main.MainAdapterV
     @NonNull
     @Override
     public Adapter_Main.MainAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.lista_secoes,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.lista_secoes, parent, false);
         return new MainAdapterViewHolder(view);
     }
 
@@ -36,8 +36,7 @@ public class Adapter_Main extends RecyclerView.Adapter<Adapter_Main.MainAdapterV
 
         holder.recyclerSessoes.setHasFixedSize(true);
         holder.recyclerSessoes.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-
-        Adapter_Filme adapterHorizontal = new Adapter_Filme(secaoAtual.getListadeFilmes());
+        Adapter_Filme adapterHorizontal = new Adapter_Filme(context, secaoAtual.getListadeFilmes());
         holder.recyclerSessoes.setAdapter(adapterHorizontal);
     }
 
@@ -48,9 +47,10 @@ public class Adapter_Main extends RecyclerView.Adapter<Adapter_Main.MainAdapterV
         }
         return 0;
     }
+
     public class MainAdapterViewHolder extends RecyclerView.ViewHolder{
-         TextView txtSessoes;
-         RecyclerView recyclerSessoes;
+        TextView txtSessoes;
+        RecyclerView recyclerSessoes;
 
         public MainAdapterViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -2,13 +2,18 @@ package com.example.myapplication;
 
 public class Filme {
     private String nome;
-    private int imagemResId;
+    private int imagem;
 
-    public Filme(String nome, int imagemResId) {
+    public Filme(String nome, int imagem) {
         this.nome = nome;
-        this.imagemResId = imagemResId;
+        this.imagem = imagem;
     }
 
-    public String getNome() { return nome; }
-    public int getImagemResId() { return imagemResId; }
+    public String getNome() {
+        return nome;
+    }
+
+    public int getImagem() {
+        return imagem;
+    }
 }

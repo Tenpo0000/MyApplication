@@ -31,8 +31,7 @@ public class Adapter_Buscar extends RecyclerView.Adapter<Adapter_Buscar.BuscaVie
     @Override
     public void onBindViewHolder(@NonNull BuscaViewHolder holder, int position) {
         Filme filme = listaFilmes.get(position);
-        holder.imagem.setImageResource(filme.getImagemResId());
-    }
+        holder.imagem.setImageResource(filme.getImagem());    }
 
     @Override
     public int getItemCount() {

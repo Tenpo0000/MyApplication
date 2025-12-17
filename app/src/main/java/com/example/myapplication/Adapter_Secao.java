@@ -4,9 +4,10 @@ import java.util.List;
 
 public class Adapter_Secao {
     private String tituloSecao;
-    private List<Integer> listadeFilmes;
+    // Mudou de Integer para Filme
+    private List<Filme> listadeFilmes;
 
-    public Adapter_Secao(String tituloSecao, List<Integer> listadeFilmes) {
+    public Adapter_Secao(String tituloSecao, List<Filme> listadeFilmes) {
         this.tituloSecao = tituloSecao;
         this.listadeFilmes = listadeFilmes;
     }
@@ -15,7 +16,8 @@ public class Adapter_Secao {
         return tituloSecao;
     }
 
-    public List<Integer> getListadeFilmes() {
+    // Mudou o retorno aqui também
+    public List<Filme> getListadeFilmes() {
         return listadeFilmes;
     }
 }
