@@ -2,6 +2,7 @@ package com.example.myapplication.Activities;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -56,9 +57,7 @@ public class Activity_Home extends AppCompatActivity {
     List<Filme> series = new ArrayList<>();
     List<Filme> programasTV = new ArrayList<>();
     List<Filme> todosOsFilmes = new ArrayList<>();
-
     Adapter_Buscar adapterBusca;
-
     PagerSnapHelper snapHelper = new PagerSnapHelper();
     Handler sliderHandler = new Handler(Looper.getMainLooper());
     Runnable sliderRunnable;
@@ -84,7 +83,7 @@ public class Activity_Home extends AppCompatActivity {
         configurarAdaptersOriginais();
         configurarPesquisa();
         iniciarAutoScroll();
-        mostrarAviso();
+        verificarAviso();
     }
 
     private void inicializarComponentes() {
@@ -206,7 +205,6 @@ public class Activity_Home extends AppCompatActivity {
     }
 
     private void configurarAdaptersOriginais() {
-        // --- ALTERAÇÃO AQUI: Agora criamos uma lista de FILMES com DESCRIÇÃO ---
         List<Filme> filmesDestaque = new ArrayList<>();
 
         filmesDestaque.add(new Filme("Stranger Things", R.drawable.stranger_things_serie,
@@ -230,14 +228,11 @@ public class Activity_Home extends AppCompatActivity {
         filmesDestaque.add(new Filme("Supernatural", R.drawable.super_natural_serie,
                 "Dois irmãos seguem os passos do pai, caçando demônios, fantasmas e monstros por todo o país."));
 
-        // Configuração do RecyclerView de Destaque
         recyclerDestaque.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         snapHelper.attachToRecyclerView(recyclerDestaque);
 
-        // --- ALTERAÇÃO AQUI: Passamos a lista de FILMES para o Adapter ---
         recyclerDestaque.setAdapter(new Adapter_FilmesDestaque(filmesDestaque));
 
-        // Setup dos indicadores usando o tamanho da nova lista
         setupIndicadores(filmesDestaque.size());
         marcarIndicadorAtual(0);
 
@@ -248,7 +243,6 @@ public class Activity_Home extends AppCompatActivity {
             }
         });
 
-        // Configuração das Seções (Mantida igual)
         List<Adapter_Secao> listaDeSecoes = Arrays.asList(
                 new Adapter_Secao("Filmes", Arrays.asList(
                         R.drawable.a_felicidade_nao_se_compra_filme,
@@ -349,7 +343,6 @@ public class Activity_Home extends AppCompatActivity {
 
     private void iniciarAutoScroll() {
         sliderRunnable = () -> {
-            // Verificações de segurança para não travar o app
             if (recyclerDestaque == null || recyclerDestaque.getLayoutManager() == null || recyclerDestaque.getAdapter() == null) {
                 return;
             }
@@ -357,7 +350,6 @@ public class Activity_Home extends AppCompatActivity {
             LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerDestaque.getLayoutManager();
             int totalItens = recyclerDestaque.getAdapter().getItemCount();
 
-            // 1. Descobre onde estamos agora usando o SnapHelper (mais preciso)
             View viewCentralizada = snapHelper.findSnapView(layoutManager);
             int posicaoAtual = 0;
             if (viewCentralizada != null) {
@@ -366,28 +358,20 @@ public class Activity_Home extends AppCompatActivity {
 
             int proximo = posicaoAtual + 1;
 
-            // 2. Se chegou no fim, define o alvo como 0 (o começo)
             if (proximo >= totalItens) {
                 proximo = 0;
             }
 
-            // 3. Cria o Scroller LENTO
             LinearSmoothScroller scroller = new LinearSmoothScroller(this) {
                 @Override
                 protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
-                    // Mude este valor para controlar a velocidade:
-                    // 25f = Padrão (Rápido)
-                    // 100f = Bem Lento (Ideal para o que você quer)
-                    // 150f = Muito Lento
                     return 100f / displayMetrics.densityDpi;
                 }
             };
 
-            // 4. Manda ir para a próxima posição (seja ela a próxima ou a 0) COM VELOCIDADE CONTROLADA
             scroller.setTargetPosition(proximo);
             layoutManager.startSmoothScroll(scroller);
 
-            // 5. Agenda a próxima rolagem
             sliderHandler.postDelayed(sliderRunnable, velocidadeScroll);
         };
 
@@ -431,26 +415,36 @@ public class Activity_Home extends AppCompatActivity {
     }
 
     private void mostrarAviso() {
-        // 1. Cria o Dialog
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        // 2. Define o layout que criamos
         dialog.setContentView(R.layout.dialog_aviso);
 
-        // 3. Deixa o fundo transparente para ver as bordas arredondadas do CardView
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        // 4. Configura o botão de fechar
         ImageView btnFechar = dialog.findViewById(R.id.btnFechar);
         btnFechar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss(); // Fecha o aviso
+                dialog.dismiss();
             }
         });
-
         dialog.show();
     }
+
+    private void verificarAviso() {
+        SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+
+        boolean avisoJaMostrado = prefs.getBoolean("aviso_mostrado", false);
+
+        if (!avisoJaMostrado) {
+            mostrarAviso();
+
+            prefs.edit()
+                    .putBoolean("aviso_mostrado", true)
+                    .apply();
+        }
+    }
+
 }
 

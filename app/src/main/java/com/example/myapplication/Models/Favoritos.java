@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Favoritos extends AppCompatActivity {
-    RecyclerView secoes;
     ImageView home;
     ImageView emAlta;
 
@@ -36,21 +35,6 @@ public class Favoritos extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        secoes = findViewById(R.id.recyclerEmAltaCategoria);
-        List<Adapter_Secao> listaDeSecoes = Arrays.asList(
-                new Adapter_Secao("Filmes Novos", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
-                new Adapter_Secao("Filmes Novos", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
-                new Adapter_Secao("Filmes Novos", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
-                new Adapter_Secao("Filmes Novos", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
-                new Adapter_Secao("Recomendados", Arrays.asList(R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme)),
-                new Adapter_Secao("Mais Vistos", Arrays.asList(R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme,R.drawable.bob_esponja_filme, R.drawable.bob_esponja_filme))
-        );
-
-        secoes.setLayoutManager(new LinearLayoutManager(this));
-        secoes.setNestedScrollingEnabled(false);
-        Adapter_Main adapterMain = new Adapter_Main(this, listaDeSecoes);
-        secoes.setAdapter(adapterMain);
-
         home = findViewById(R.id.btnHome);
         emAlta = findViewById(R.id.btnMaisVistos);
     }

@@ -106,24 +106,29 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edtSenha"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="12dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:ems="10"
-            android:layout_weight="1"
-            android:textSize="15dp"
-            app:strokeColor="@color/white"
-            app:strokeWidth="3dp"
-            android:background="@drawable/shape_edtbordado"
-            android:hint="******"
-            android:inputType="textPassword"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white" />
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtSenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:ems="10"
+                android:textSize="15sp"
+                android:background="@drawable/shape_edtbordado"
+                android:hint="******"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/BtnEsqueceuSenha"

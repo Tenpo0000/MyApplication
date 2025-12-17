@@ -57,6 +57,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_marginEnd="16dp"
+                            android:onClick="favoritos"
                             android:src="@drawable/icone_notificacao" />
 
                         <ImageView
@@ -64,6 +65,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_marginEnd="16dp"
+                            android:onClick="favoritos"
                             android:src="@drawable/icone_transmitir_tela" />
 
                         <ImageView
@@ -71,6 +73,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_marginEnd="8dp"
+                            android:onClick="favoritos"
                             android:src="@drawable/icone_menu" />
                     </LinearLayout>
 
@@ -102,8 +105,9 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_marginEnd="16dp"
+                            android:background="@drawable/shape_edtbordado"
                             android:drawableBottom="@drawable/info"
-                            android:background="@drawable/shape_edtbordado" />
+                            android:onClick="favoritos" />
                     </LinearLayout>
 
                     <LinearLayout

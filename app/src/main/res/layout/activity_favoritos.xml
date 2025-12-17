@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -9,24 +8,17 @@
     android:background="@color/Azul"
     tools:context=".Activities.Activity_Home">
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@+id/ll_rodape"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        Z<LinearLayout
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,8 +48,8 @@
                     android:id="@+id/ll_icones"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
                     android:layout_margin="8dp"
+                    android:gravity="end"
                     android:paddingTop="30dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="10dp">
@@ -86,41 +78,48 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/ll_rodape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.413">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_margin="8dp"
-            android:orientation="horizontal">
+            app:srcCompat="@drawable/icone_manutencao" />
 
-            <TextView
-                android:id="@+id/txtFilmes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/shape_edtbordado"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="Favoritos"
-                android:textColor="@color/white">
-            </TextView>
-
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/txtManutencao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-        </LinearLayout>
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="🛠️ Ops! Voltamos já"
+            android:textColor="@color/amarelo"
+            android:textSize="30sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerEmAltaCategoria"
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:nestedScrollingEnabled="false" />
+            android:gravity="center"
+            android:text="Nosso app resolveu tirar um cochilo técnico 💤 \n\nEstamos em manutenção dando uns ajustes,\napertando uns parafusos invisíveis\ne brigando com bugs rebeldes 🐞"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
 
     </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
         android:id="@+id/ll_rodape"
@@ -146,7 +145,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:src="@drawable/favorito" />
+            android:src="@drawable/favorito_contorno" />
 
         <ImageView
             android:id="@+id/btnMaisVistos"
