@@ -12,34 +12,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".EmAlta"
+            android:name=".Models.EmAlta"
             android:exported="false" />
         <activity
-            android:name=".Favoritos"
+            android:name=".Models.Favoritos"
             android:exported="false" />
         <activity
-            android:name=".Categoria_Series"
+            android:name=".Models.Categoria_Series"
             android:exported="false" />
         <activity
-            android:name=".Categoria_TV"
+            android:name=".Models.Categoria_TV"
             android:exported="false" />
         <activity
-            android:name=".Categoria_filme"
+            android:name=".Models.Categoria_filme"
             android:exported="false" />
         <activity
-            android:name=".Activity_RedefinirSenha"
+            android:name=".Activities.Activity_RedefinirSenha"
             android:exported="false" />
         <activity
-            android:name=".Activity_Home"
+            android:name=".Activities.Activity_Home"
             android:exported="false" />
         <activity
-            android:name=".Activity_Registrar"
+            android:name=".Activities.Activity_Registrar"
             android:exported="false" />
         <activity
-            android:name=".Activity_Login"
+            android:name=".Activities.Activity_Login"
             android:exported="false" />
         <activity
-            android:name=".Activity_Main"
+            android:name=".Activities.Activity_Main"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

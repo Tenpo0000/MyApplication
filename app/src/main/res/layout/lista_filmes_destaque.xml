@@ -12,11 +12,29 @@
         android:contentDescription="pôster de filmes principais"
         android:scaleType="centerCrop"
         tools:src="@drawable/bob_esponja_filme" />
-
     <View
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="50dp"
         android:layout_gravity="bottom"
         android:background="@drawable/fade_effect"
         android:alpha="1"/>
+
+    <TextView
+        android:id="@+id/descricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="6dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"
+        android:textAlignment="center"
+        tools:text="Mario e seu irmão Luigi são encanadores do Brooklyn. Um dia, eles vão parar no reino dos cogumelos..." />
 </FrameLayout>
