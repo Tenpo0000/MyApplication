@@ -349,48 +349,85 @@ public class Activity_Home extends AppCompatActivity {
 
     private void iniciarAutoScroll() {
         sliderRunnable = () -> {
-            if (recyclerDestaque == null || recyclerDestaque.getLayoutManager() == null) return;
-
-            LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerDestaque.getLayoutManager();
-            int atual = layoutManager.findFirstVisibleItemPosition();
-            int proximo = atual + 1;
-
-            if (recyclerDestaque.getAdapter() != null) {
-                if (proximo >= recyclerDestaque.getAdapter().getItemCount()) proximo = 0;
-
-                LinearSmoothScroller scroller = new LinearSmoothScroller(this) {
-                    @Override
-                    protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
-                        return 100f / displayMetrics.densityDpi;
-                    }
-                };
-
-                scroller.setTargetPosition(proximo);
-                layoutManager.startSmoothScroll(scroller);
+            // Verificações de segurança para não travar o app
+            if (recyclerDestaque == null || recyclerDestaque.getLayoutManager() == null || recyclerDestaque.getAdapter() == null) {
+                return;
             }
 
+            LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerDestaque.getLayoutManager();
+            int totalItens = recyclerDestaque.getAdapter().getItemCount();
+
+            // 1. Descobre onde estamos agora usando o SnapHelper (mais preciso)
+            View viewCentralizada = snapHelper.findSnapView(layoutManager);
+            int posicaoAtual = 0;
+            if (viewCentralizada != null) {
+                posicaoAtual = layoutManager.getPosition(viewCentralizada);
+            }
+
+            int proximo = posicaoAtual + 1;
+
+            // 2. Se chegou no fim, define o alvo como 0 (o começo)
+            if (proximo >= totalItens) {
+                proximo = 0;
+            }
+
+            // 3. Cria o Scroller LENTO
+            LinearSmoothScroller scroller = new LinearSmoothScroller(this) {
+                @Override
+                protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
+                    // Mude este valor para controlar a velocidade:
+                    // 25f = Padrão (Rápido)
+                    // 100f = Bem Lento (Ideal para o que você quer)
+                    // 150f = Muito Lento
+                    return 100f / displayMetrics.densityDpi;
+                }
+            };
+
+            // 4. Manda ir para a próxima posição (seja ela a próxima ou a 0) COM VELOCIDADE CONTROLADA
+            scroller.setTargetPosition(proximo);
+            layoutManager.startSmoothScroll(scroller);
+
+            // 5. Agenda a próxima rolagem
             sliderHandler.postDelayed(sliderRunnable, velocidadeScroll);
         };
 
         sliderHandler.postDelayed(sliderRunnable, velocidadeScroll);
     }
 
+
+
     public void categoria_filme(View v) { startActivity(new Intent(this, Categoria_filme.class)); }
+
     public void categoria_Tv(View v) { startActivity(new Intent(this, Categoria_TV.class)); }
+
     public void categoria_Serie(View v) { startActivity(new Intent(this, Categoria_Series.class)); }
+
     public void favoritos(View v) { startActivity(new Intent(this, Favoritos.class)); }
+
     public void emAlta(View v) { startActivity(new Intent(this, EmAlta.class)); }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        sliderHandler.removeCallbacks(sliderRunnable);
-    }
+
 
     @Override
+
+    protected void onPause() {
+
+        super.onPause();
+
+        sliderHandler.removeCallbacks(sliderRunnable);
+
+    }
+
+
+
+    @Override
+
     protected void onResume() {
+
         super.onResume();
+
         sliderHandler.postDelayed(sliderRunnable, velocidadeScroll);
+
     }
 
     private void mostrarAviso() {
@@ -413,7 +450,7 @@ public class Activity_Home extends AppCompatActivity {
             }
         });
 
-        // 5. Mostra na tela
         dialog.show();
     }
 }
+
