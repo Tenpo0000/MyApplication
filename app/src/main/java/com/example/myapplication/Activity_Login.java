@@ -20,7 +20,6 @@ public class Activity_Login extends AppCompatActivity {
     Button btnEntrar;
     EditText edtEmailLogin;
     EditText edtSenhaLogin;
-    private static final long TEMPO_LIMITE = 60 * 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,22 +27,14 @@ public class Activity_Login extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("users", MODE_PRIVATE);
         boolean estaLogado = prefs.getBoolean("estaLogado", false);
-        long ultimoAcesso = prefs.getLong("ultimo_acesso", 0);
-        long agora = System.currentTimeMillis();
 
         if (estaLogado) {
-            if ((agora - ultimoAcesso) < TEMPO_LIMITE) {
-                Intent irParaHome = new Intent(this, Activity_Home.class);
-                startActivity(irParaHome);
-                finish();
-                return;
-            } else {
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putBoolean("estaLogado", false);
-                editor.apply();
-                Toast.makeText(this, "Sessão expirada. Faça login novamente.", Toast.LENGTH_LONG).show();
-            }
+            Intent intent = new Intent(this, Activity_Home.class);
+            startActivity(intent);
+            finish();
+            return;
         }
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
@@ -52,15 +43,18 @@ public class Activity_Login extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         btnRegistrar = findViewById(R.id.btnRegistrar);
         btnEntrar = findViewById(R.id.btnEntrar);
         edtEmailLogin = findViewById(R.id.edtEmail);
         edtSenhaLogin = findViewById(R.id.edtSenha);
     }
+
     public void registrar(View v) {
         Intent registrar = new Intent(this, Activity_Registrar.class);
         startActivity(registrar);
     }
+
     public void Entrar(View v) {
         String emailDigitado = edtEmailLogin.getText().toString().trim();
         String senhaDigitada = edtSenhaLogin.getText().toString();
@@ -89,8 +83,6 @@ public class Activity_Login extends AppCompatActivity {
             editor.putLong("ultimo_acesso", System.currentTimeMillis());
             editor.apply();
 
-            Toast.makeText(this, "Bem-vindo(a)!", Toast.LENGTH_SHORT).show();
-
             Intent entrar = new Intent(this, Activity_Home.class);
             entrar.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(entrar);
@@ -101,7 +93,7 @@ public class Activity_Login extends AppCompatActivity {
             edtEmailLogin.setError(msg);
             edtSenhaLogin.setError(msg);
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-            edtEmailLogin.requestFocus(); // Foca no email para corrigir
+            edtEmailLogin.requestFocus();
         }
     }
 }
